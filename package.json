@@ -2,7 +2,9 @@
   "name": "football-trends",
   "version": "0.1.0",
   "license": "UNLICENSED",
-  "scripts": {},
+  "scripts": {
+    "lint": "nx run-many --target=lint"
+  },
   "private": true,
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",
