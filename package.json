@@ -6,6 +6,7 @@
   "private": true,
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",
+    "@emotion/cache": "^11.10.5",
     "@nrwl/cypress": "15.6.3",
     "@nrwl/esbuild": "15.6.3",
     "@nrwl/eslint-plugin-nx": "15.6.3",
@@ -53,10 +54,18 @@
     "typescript": "~4.8.2"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/server": "^11.10.0",
+    "@emotion/styled": "^11.10.5",
+    "@fontsource/roboto": "^4.5.8",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.7",
+    "@next/font": "^13.1.6",
     "axios": "^1.0.0",
     "next": "13.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "recharts": "^2.3.2",
     "tslib": "^2.3.0"
   }
 }
