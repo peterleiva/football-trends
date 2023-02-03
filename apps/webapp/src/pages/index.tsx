@@ -1,6 +1,17 @@
+import { useQuery } from 'react-query';
 import styles from './index.module.scss';
 
 export function Index() {
+  const { data } = useQuery('users', async () => {
+    const res = await fetch('http://localhost:3000/users/1');
+
+    if (res.ok) {
+      return res.json();
+    } else {
+      throw new Error(await res.text());
+    }
+  });
+
   /*
    * Replace the elements below with your own.
    *
@@ -12,7 +23,7 @@ export function Index() {
         <div className="container">
           <div id="welcome">
             <h1>
-              <span> Hello there, </span>
+              <span> Hello there {data?.name ?? 'Anonymous'},</span>
               Welcome webapp 👋
             </h1>
           </div>

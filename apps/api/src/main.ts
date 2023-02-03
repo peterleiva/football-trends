@@ -3,6 +3,7 @@ import logger from 'morgan';
 import createError from 'http-errors';
 import cookieParser from 'cookie-parser';
 import path from 'path';
+import cors from 'cors';
 
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
 
@@ -13,9 +14,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.json({ message: 'Hello API' });
+});
+
+app.get('/users/:id', (req, res) => {
+  res.json({
+    name: 'Jane doe',
+  });
 });
 
 app.get('/users', (req, res) => {
