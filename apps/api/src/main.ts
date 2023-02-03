@@ -8,6 +8,12 @@ const port = process.env.PORT ? Number(process.env.PORT) : 3000;
 
 const app = express();
 
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.get('/', (req, res) => {
   res.json({ message: 'Hello API' });
 });
@@ -15,12 +21,6 @@ app.get('/', (req, res) => {
 app.get('/users', (req, res) => {
   res.json({ users: [{ name: 'Jane Doe' }] });
 });
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
