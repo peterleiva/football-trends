@@ -14,7 +14,7 @@ export function Index() {
       <div className="wrapper">
         <div className="container">
           <div id="welcome">
-            <h1>
+            <h1 className="text-orange-500 font-bold">
               <span> Hello there {user?.name ?? 'Anonymous'},</span>
               Welcome webapp 👋
             </h1>
