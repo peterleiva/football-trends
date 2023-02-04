@@ -7,7 +7,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <ApiProvider>
       <Head>
-        <title>Welcome to webapp!</title>
+        <title>Football Trends</title>
       </Head>
       <main className="app">
         <Component {...pageProps} />

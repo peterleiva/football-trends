@@ -1,16 +1,19 @@
+import { GetServerSideProps } from 'next';
 import { useQuery } from 'react-query';
 import styles from './index.module.scss';
 
-export function Index() {
-  const { data } = useQuery('users', async () => {
-    const res = await fetch('http://localhost:3000/users/1');
+const getUser = (id: number) => async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${id}`);
 
-    if (res.ok) {
-      return res.json();
-    } else {
-      throw new Error(await res.text());
-    }
-  });
+  if (res.ok) {
+    return res.json();
+  } else {
+    throw new Error(await res.text());
+  }
+};
+
+export function Index() {
+  const { data } = useQuery('users', getUser(1));
 
   /*
    * Replace the elements below with your own.
