@@ -3,7 +3,7 @@ import logger from 'morgan';
 import createError from 'http-errors';
 import cookieParser from 'cookie-parser';
 import path from 'path';
-import cors from 'cors';
+import * as User from './app/users';
 
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
 
@@ -14,20 +14,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors());
+
+app.use(User.ROUTER_PREFIX, User.router);
 
 app.get('/', (req, res) => {
   res.json({ message: 'Hello API' });
-});
-
-app.get('/users/:id', (req, res) => {
-  res.json({
-    name: 'Jane doe',
-  });
-});
-
-app.get('/users', (req, res) => {
-  res.json({ users: [{ name: 'Jane Doe' }] });
 });
 
 // catch 404 and forward to error handler
@@ -41,9 +32,11 @@ app.use(function (err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
+  console.error(err);
+
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  throw err;
 });
 
 app.listen(port, () => {

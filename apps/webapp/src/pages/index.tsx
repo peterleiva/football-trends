@@ -1,19 +1,8 @@
-import { GetServerSideProps } from 'next';
-import { useQuery } from 'react-query';
+import useUsers from '../use-users/use-users';
 import styles from './index.module.scss';
 
-const getUser = (id: number) => async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${id}`);
-
-  if (res.ok) {
-    return res.json();
-  } else {
-    throw new Error(await res.text());
-  }
-};
-
 export function Index() {
-  const { data } = useQuery('users', getUser(1));
+  const { user } = useUsers();
 
   /*
    * Replace the elements below with your own.
@@ -26,7 +15,7 @@ export function Index() {
         <div className="container">
           <div id="welcome">
             <h1>
-              <span> Hello there {data?.name ?? 'Anonymous'},</span>
+              <span> Hello there {user?.name ?? 'Anonymous'},</span>
               Welcome webapp 👋
             </h1>
           </div>
