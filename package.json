@@ -76,6 +76,7 @@
     "node-environment": "^0.5.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.43.0",
     "react-query": "^3.39.3",
     "recharts": "^2.3.2",
     "tslib": "^2.3.0"
