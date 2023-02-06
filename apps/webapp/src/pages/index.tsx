@@ -11,7 +11,7 @@ export function Index() {
     <div className={styles.page}>
       <div className="wrapper">
         <div className="container mt-10">
-          <Combobox />
+          <Combobox renderEmptyState={() => <p>no results</p>} />
         </div>
       </div>
     </div>

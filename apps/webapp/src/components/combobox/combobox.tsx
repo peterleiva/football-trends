@@ -1,157 +1,48 @@
-import { Console, log } from 'console';
-import {
-  ChangeEventHandler,
-  Reducer,
-  useCallback,
-  useEffect,
-  useReducer,
-  useRef,
-  useState,
-} from 'react';
-import { useDebounce } from 'usehooks-ts';
-import { useGetUsersByKeyword, User } from '../../use-users/use-users';
+import { useGetUsersByKeyword } from '../../use-users/use-users';
 import { SearchInput } from './search';
-import { useFormValue } from './use-form-value';
+import { useCombobox } from './use-combobox';
+import { getId, getLabel, Option } from './utils';
 
-type State = {
-  focused?: number | null;
-  isVisible: boolean;
-};
-
-type ACTIONTYPE = { type: 'toggle' } | { type: 'visibility'; payload: boolean };
-
-const reducer = (state: State, action: ACTIONTYPE): State => {
-  switch (action.type) {
-    case 'toggle':
-      return {
-        isVisible: !state.isVisible,
-        focused: state.isVisible ? state.focused : null,
-      };
-
-    case 'visibility':
-      return {
-        isVisible: action.payload,
-        focused: action.payload ? state.focused : null,
-      };
-
-    default:
-      throw new Error(`useComplete: unknown action [${action}]`);
-  }
-};
-
-const initializer = (initialValue: State): State => {
-  return {
-    ...initialValue,
-    focused: null,
-    isVisible: false,
-  };
-};
-
-export function useAutocomplete() {
-  const [{ isVisible }, dispatch] = useReducer<
-    Reducer<State, ACTIONTYPE>,
-    State
-  >(reducer, { focused: null, isVisible: false }, initializer);
-
-  const setVisibility = useCallback(
-    (visible: boolean) => {
-      dispatch({ type: 'visibility', payload: visible });
-    },
-    [dispatch]
-  );
-
-  return {
-    isVisible,
-    toggle: () => dispatch({ type: 'toggle' }),
-    setVisibility,
-  };
+interface ComboboxProps<T extends Option> {
+  options?: readonly T[] | readonly string[];
+  renderOption?: (props: any, option: T | string) => JSX.Element;
+  renderEmptyState?: () => JSX.Element;
 }
 
-export function Combobox() {
-  const { register, value: term, setValue, setFocus } = useFormValue();
-  const searchTerm = useDebounce(term);
-  const { isVisible, setVisibility } = useAutocomplete();
-  const { users, isLoading } = useGetUsersByKeyword(searchTerm);
+export function Combobox<T extends Option>({
+  options = [],
+  renderOption,
+  renderEmptyState,
+}: ComboboxProps<T>) {
+  const { isVisible, onSelect, register, searchTerm } = useCombobox();
 
-  const [focused, setFocused] = useState<number | null>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const { users } = useGetUsersByKeyword(searchTerm);
 
-  const res = register();
-
-  const blurHandler = () => {
-    console.log('vlur1');
-    // setVisibility(false);
-  };
-  const focusHandler = () => term.length > 0 && setVisibility(true);
-
-  const clickHandler = useCallback(
-    (user: User) => {
-      setFocus();
-      setValue(user.name);
-      setVisibility(true);
-    },
-    [setValue, setFocus, setVisibility]
+  options = (users?.map((u) => ({ label: u.name, id: u.id })) as any) ?? [];
+  renderOption = (props, option: T) => (
+    <li className="cursor-pointer p-2 hover:bg-slate-400" {...props}>
+      {option.label}
+    </li>
   );
-
-  useEffect(() => {
-    setVisibility(searchTerm.length > 0);
-  }, [setVisibility, searchTerm]);
-
-  useEffect(() => {
-    const listener = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        console.log('INPUTREF', inputRef);
-
-        setVisibility(false);
-      }
-
-      if (e.key === 'ArrowDown') {
-        setVisibility(true);
-        setFocused((focused) =>
-          users?.length > 0
-            ? !focused
-              ? 0
-              : Math.min(focused + 1, users.length - 1)
-            : null
-        );
-      }
-
-      // if (e.key === 'ArrowUp') {
-      //   setFocused();
-      // }
-    };
-
-    document.addEventListener('keydown', listener);
-
-    return () => {
-      document.removeEventListener('keydown', listener);
-    };
-  }, [users, setVisibility]);
 
   return (
     <div className="combobox">
-      <SearchInput
-        ref={inputRef}
-        name="combobox"
-        id="combobox"
-        onFocus={focusHandler}
-        {...register({ onBlur: blurHandler })}
-      />
+      <SearchInput name="combobox" id="combobox" {...register()} />
       {isVisible && (
         <div className="autocomplete bg-slate-300 rounded-sm p-5 w-full mx-auto">
           <ul>
-            {users?.length === 0 && 'nenhum item encontrado'}
+            {options?.length === 0 && renderEmptyState?.()}
 
-            {users?.map((user, index) => (
-              <li
-                role="button"
-                key={user.id}
-                onClick={() => clickHandler(user)}
-                className="mb-2 hover:bg-red-300 cursor-pointer p-2"
-              >
-                {user.name} ({focused === index && 'focused'})
-              </li>
-            ))}
+            {options?.map((option: string | T) =>
+              renderOption?.(
+                {
+                  role: 'button',
+                  key: getId(option),
+                  onClick: () => onSelect(getLabel(option)),
+                },
+                option
+              )
+            )}
           </ul>
         </div>
       )}

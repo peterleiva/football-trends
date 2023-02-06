@@ -1,23 +1,30 @@
-import { RegisterOptions, useForm } from 'react-hook-form';
+import { useRef, useState } from 'react';
+import { RegisterOptions } from 'react-hook-form';
 
 interface FormData {
   term: string;
 }
 
 export const useFormValue = () => {
-  const { register, watch, setValue, setFocus } = useForm<FormData>({
-    values: {
-      term: '',
-    },
-  });
+  const [value, setValue] = useState('');
+  const ref = useRef<HTMLInputElement>(null);
 
-  const value = watch('term');
+  const setFocus = () => {
+    ref?.current?.focus();
+  };
 
   return {
-    register: (options: RegisterOptions<FormData> = {}) =>
-      register('term', options),
+    ref,
+    register: (options: RegisterOptions<FormData> = {}) => ({
+      ref,
+      value,
+      onChange: (e) => {
+        setValue(e.target.value);
+        options?.onChange?.(e);
+      },
+    }),
     value,
-    setValue: (value: string) => setValue('term', value),
-    setFocus: () => setFocus('term'),
+    setValue,
+    setFocus,
   };
 };
