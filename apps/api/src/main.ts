@@ -4,6 +4,7 @@ import createError from 'http-errors';
 import cookieParser from 'cookie-parser';
 import path from 'path';
 import * as User from './app/users';
+import * as DB from './database';
 
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
 
@@ -14,6 +15,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+DB.start();
 
 app.use(User.ROUTER_PREFIX, User.router);
 
