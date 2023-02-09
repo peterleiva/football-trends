@@ -1,10 +1,11 @@
 import mongoose, { type Connection } from 'mongoose';
+import { env } from 'node-environment';
 
 export type DatabaseOptions = Partial<{
   url: string;
 }>;
 
-const isProd = process.env.NODE_ENV === 'production';
+const isProd = env('prod');
 const DEV_URI_FALLBACK = 'mongodb://localhost/football-trends';
 
 let db = mongoose.connection;
