@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import styles from './App.style';
-import { QuizInput } from './components';
+import { QuizFormControl } from './components';
 
 export const App = () => {
   const scrollViewRef = useRef<null | ScrollView>(null);
@@ -31,7 +31,7 @@ export const App = () => {
             </Text>
           </View>
           <View>
-            <QuizInput>Qual maior 9 da história ?</QuizInput>
+            <QuizFormControl>Qual maior 9 da história ?</QuizFormControl>
           </View>
         </ScrollView>
       </SafeAreaView>

@@ -1,1 +1,1 @@
-export * from './QuizInput';
+export * from './QuizFormControl';

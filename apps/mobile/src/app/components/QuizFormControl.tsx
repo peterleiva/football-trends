@@ -1,4 +1,4 @@
-import { ReactNode, useRef } from 'react';
+import { useRef } from 'react';
 import {
   GestureResponderEvent,
   Text,
@@ -6,11 +6,11 @@ import {
   TextInputProps,
   TouchableWithoutFeedback,
 } from 'react-native';
-import styles from './QuizInput.style';
+import styles from './QuizFormControl.style';
 
 type QuizInputProps = TextInputProps;
 
-export function QuizInput({
+export function QuizFormControl({
   children,
   style,
   ...inputProps
@@ -18,7 +18,7 @@ export function QuizInput({
   const inputRef = useRef<TextInput>(null);
 
   const pressHandler = (e: GestureResponderEvent) => {
-    inputRef.current?.focus();
+    // inputRef.current?.focus();
   };
 
   return (
@@ -29,7 +29,6 @@ export function QuizInput({
           {...inputProps}
           style={[style, styles.input]}
           ref={inputRef}
-          blurOnSubmit={false}
         />
       </>
     </TouchableWithoutFeedback>

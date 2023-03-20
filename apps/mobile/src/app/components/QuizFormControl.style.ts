@@ -6,12 +6,11 @@ const style = StyleSheet.create({
     marginBottom: 24,
   },
   input: {
-    borderColor: 'hsl(1, 1, 1)',
+    borderColor: 'hsl(0, 0, 0)',
     borderRadius: 10,
     borderWidth: 1.5,
-    height: 48,
     padding: 24,
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '800',
   },
 });
