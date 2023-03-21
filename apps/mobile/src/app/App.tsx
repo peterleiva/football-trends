@@ -1,12 +1,5 @@
-import { useRef } from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import { StrictMode, useRef } from 'react';
+import { SafeAreaView, ScrollView, StatusBar, Text, View } from 'react-native';
 import styles from './App.style';
 import { QuizFormControl } from './components';
 
@@ -14,7 +7,7 @@ export const App = () => {
   const scrollViewRef = useRef<null | ScrollView>(null);
 
   return (
-    <>
+    <StrictMode>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <ScrollView
@@ -35,7 +28,7 @@ export const App = () => {
           </View>
         </ScrollView>
       </SafeAreaView>
-    </>
+    </StrictMode>
   );
 };
 
