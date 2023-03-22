@@ -9,7 +9,11 @@
     "resolveJsonModule": true,
     "strict": true,
     "composite": true,
-    "declaration": true
+    "declaration": true,
+    "paths": {
+      "@utils/*": ["./apps/mobile/src/utils/*"],
+      "@utils": ["./apps/mobile/src/utils/index.ts"]
+    }
   },
   "files": ["../../node_modules/@nrwl/expo/typings/svg.d.ts"],
   "include": [],

@@ -1,7 +1,7 @@
 import { StrictMode, useRef } from 'react';
 import { SafeAreaView, ScrollView, StatusBar, Text, View } from 'react-native';
 import styles from './App.style';
-import { QuizFormControl } from './components';
+import { QuizFormControl, Timer } from './components';
 
 export const App = () => {
   const scrollViewRef = useRef<null | ScrollView>(null);
@@ -24,6 +24,7 @@ export const App = () => {
             </Text>
           </View>
           <View>
+            <Timer></Timer>
             <QuizFormControl>Qual maior 9 da história ?</QuizFormControl>
           </View>
         </ScrollView>

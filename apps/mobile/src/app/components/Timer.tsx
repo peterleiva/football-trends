@@ -1,9 +1,16 @@
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
+import { useCountdown } from '@utils';
 
 interface TimerProps {
-  progress: number;
+  countdown?: number; // in miliseconds
 }
 
-export function Timer({ progress }: TimerProps): JSX.Element {
-  return <View>{progress}</View>;
+export function Timer({ countdown }: TimerProps): JSX.Element {
+  const { timeInSeconds } = useCountdown({ time: countdown });
+
+  return (
+    <View>
+      <Text>{timeInSeconds}s</Text>
+    </View>
+  );
 }
