@@ -1,10 +1,11 @@
 import { useRef } from 'react';
 import {
   GestureResponderEvent,
+  Pressable,
   Text,
   TextInput,
   TextInputProps,
-  TouchableWithoutFeedback,
+  View,
 } from 'react-native';
 import styles from './QuizFormControl.style';
 
@@ -18,19 +19,20 @@ export function QuizFormControl({
   const inputRef = useRef<TextInput>(null);
 
   const pressHandler = (e: GestureResponderEvent) => {
-    // inputRef.current?.focus();
+    inputRef.current?.focus();
   };
 
   return (
-    <TouchableWithoutFeedback onPress={pressHandler}>
-      <>
+    <Pressable onPress={pressHandler}>
+      <View>
         <Text style={styles.title}>{children}</Text>
         <TextInput
           {...inputProps}
-          style={[style, styles.input]}
+          style={[styles.input, style]}
           ref={inputRef}
+          blurOnSubmit={false}
         />
-      </>
-    </TouchableWithoutFeedback>
+      </View>
+    </Pressable>
   );
 }
