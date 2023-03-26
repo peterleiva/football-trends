@@ -1,10 +1,19 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: '#ffffff',
+  container: {
+    backgroundColor: '#2B2D42',
+    color: 'white',
     padding: 24,
     gap: 15,
+    height: '100%',
+    position: 'relative',
+  },
+  header: {
+    flexDirection: 'row',
+    gap: 20,
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   timer: {
     alignItems: 'center',
@@ -44,6 +53,16 @@ const styles = StyleSheet.create({
   appTitleText: {
     paddingTop: 12,
     fontWeight: '500',
+  },
+  bottom: {
+    position: 'absolute',
+    width: '95%',
+    right: '2.5%',
+    bottom: 12,
+  },
+  input: {
+    width: '100%',
+    backgroundColor: 'white',
   },
 });
 

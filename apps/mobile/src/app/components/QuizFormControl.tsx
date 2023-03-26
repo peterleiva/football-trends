@@ -8,6 +8,7 @@ import {
   View,
 } from 'react-native';
 import styles from './QuizFormControl.style';
+import QuizInput from './QuizInput';
 
 type QuizInputProps = TextInputProps;
 
@@ -26,12 +27,7 @@ export function QuizFormControl({
     <Pressable onPress={pressHandler}>
       <View>
         <Text style={styles.title}>{children}</Text>
-        <TextInput
-          {...inputProps}
-          style={[styles.input, style]}
-          ref={inputRef}
-          blurOnSubmit={false}
-        />
+        <QuizInput ref={inputRef} {...inputProps}></QuizInput>
       </View>
     </Pressable>
   );
