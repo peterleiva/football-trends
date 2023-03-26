@@ -12,14 +12,14 @@ const LIMIT = {
 };
 
 export default function ProgressBar({ progress }: ProgressBarProps) {
-  const percent = Math.min(Math.max(progress, LIMIT.min), LIMIT.max) / 100;
+  const percent = Math.min(Math.max(progress, LIMIT.min), LIMIT.max);
   const horizontalSpace = 5;
   const width = 200;
-  const progressWidth = (width - 2 * horizontalSpace) * percent;
+  const progressWidth = percent - horizontalSpace + '%';
 
   return (
     <Svg width={width} height={10} style={{ flexGrow: 0 }}>
-      <Rect width={width} height="10" fill="#F26B6B" rx="4"></Rect>
+      <Rect width="100%" height="10" fill="#F26B6B" rx="4"></Rect>
       <Rect
         width={progressWidth}
         height="5"

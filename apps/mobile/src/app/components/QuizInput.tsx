@@ -19,9 +19,8 @@ export default function QuizInput({
       <TextInput {...inputProps} style={[inputStyle.input, style]} />
       <View style={inputStyle.clear}>
         {showClearBtn && (
-          <MaterialIcons.Button
+          <MaterialIcons
             name="clear-all"
-            backgroundColor="unset"
             color="black"
             onPress={onClear}
             style={{
@@ -29,7 +28,7 @@ export default function QuizInput({
               justifyContent: 'center',
             }}
             size={24}
-          ></MaterialIcons.Button>
+          ></MaterialIcons>
         )}
       </View>
     </View>

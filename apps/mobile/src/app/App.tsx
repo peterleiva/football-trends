@@ -24,8 +24,8 @@ export const App = () => {
             alert('Close!!');
           }}
         />
-        <ProgressBar progress={30}></ProgressBar>
-        <ScoreLabel points={10}></ScoreLabel>
+        <ProgressBar progress={20}></ProgressBar>
+        <ScoreLabel points={2}></ScoreLabel>
       </View>
       <View>
         <Card title="Qual maior 9 da história do futebol"></Card>
