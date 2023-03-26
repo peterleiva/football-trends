@@ -15,7 +15,7 @@ export default function ScoreLabel({ points }: ScoreLabelProps) {
 
 const styles = StyleSheet.create({
   score: {
-    padding: 10,
+    padding: 5,
     borderColor: '#fff',
     borderWidth: 1,
     borderRadius: 24,
