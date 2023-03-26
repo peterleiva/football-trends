@@ -7,7 +7,9 @@ interface CardProps {
 export default function Card({ title }: CardProps) {
   return (
     <View style={styles.card}>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title} selectable>
+        {title}
+      </Text>
     </View>
   );
 }

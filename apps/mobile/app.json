@@ -10,6 +10,17 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "assets": ["./assets"],
+    "fonts": [
+      {
+        "family": "Montserrat",
+        "fonts": [
+          {
+            "asset": "assets/fonts/Montserrat.ttf"
+          }
+        ]
+      }
+    ],
     "updates": {
       "fallbackToCacheTimeout": 0
     },

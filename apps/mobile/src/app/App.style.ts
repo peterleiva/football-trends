@@ -1,12 +1,15 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     backgroundColor: '#2B2D42',
+    flex: 1,
+    padding: 40,
+  },
+  container: {
     color: 'white',
     padding: 24,
     gap: 15,
-    height: '100%',
     position: 'relative',
   },
   header: {
@@ -14,51 +17,17 @@ const styles = StyleSheet.create({
     gap: 20,
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginBottom: 24,
   },
   timer: {
     alignItems: 'center',
     alignSelf: 'center',
   },
-  monospace: {
-    color: '#ffffff',
-    fontFamily: 'Courier New',
-    marginVertical: 4,
-  },
-  section: {
-    marginVertical: 24,
-    marginHorizontal: 12,
-  },
-  shadowBox: {
-    backgroundColor: 'white',
-    borderRadius: 24,
-    shadowColor: 'black',
-    shadowOpacity: 0.15,
-    shadowOffset: {
-      width: 1,
-      height: 4,
-    },
-    shadowRadius: 12,
-    padding: 24,
-    marginBottom: 24,
-  },
-  listItem: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  listItemTextContainer: {
-    marginLeft: 12,
-    flex: 1,
-  },
-  appTitleText: {
-    paddingTop: 12,
-    fontWeight: '500',
-  },
   bottom: {
     position: 'absolute',
-    width: '95%',
-    right: '2.5%',
-    bottom: 12,
+    bottom: 24,
+    width: '90%',
+    alignSelf: 'center',
   },
   input: {
     width: '100%',

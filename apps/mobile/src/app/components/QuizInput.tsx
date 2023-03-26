@@ -16,11 +16,7 @@ export default function QuizInput({
 }: QuizInputProps) {
   return (
     <View style={inputStyle.container}>
-      <TextInput
-        {...inputProps}
-        style={[inputStyle.input, style]}
-        blurOnSubmit={false}
-      />
+      <TextInput {...inputProps} style={[inputStyle.input, style]} />
       <View style={inputStyle.clear}>
         {showClearBtn && (
           <MaterialIcons.Button
@@ -45,6 +41,7 @@ const inputStyle = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    width: '100%',
   },
   clear: {
     position: 'absolute',
@@ -60,5 +57,6 @@ const inputStyle = StyleSheet.create({
     padding: 16,
     paddingRight: 60,
     fontSize: 16,
+    width: '100%',
   },
 });
