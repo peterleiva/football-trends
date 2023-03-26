@@ -6,6 +6,17 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 40,
   },
+  btn: {
+    position: 'absolute',
+    bottom: -48,
+    right: -48,
+    borderRadius: 0,
+    borderBottomRightRadius: 28,
+    borderTopLeftRadius: 6,
+  },
+  option: {
+    padding: 12,
+  },
   container: {
     color: 'white',
     padding: 24,
@@ -26,8 +37,9 @@ const styles = StyleSheet.create({
   bottom: {
     position: 'absolute',
     bottom: 24,
-    width: '90%',
+    width: '100%',
     alignSelf: 'center',
+    flexGrow: 1,
   },
   input: {
     width: '100%',

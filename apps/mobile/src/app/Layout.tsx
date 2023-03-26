@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
   layout: {
     backgroundColor: '#2B2D42',
     flex: 1,
+    position: 'relative',
   },
   container: {
     padding: 24,

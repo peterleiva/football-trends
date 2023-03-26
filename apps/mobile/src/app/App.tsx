@@ -1,8 +1,15 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
-import { KeyboardAvoidingView, View } from 'react-native';
+import {
+  FlatList,
+  KeyboardAvoidingView,
+  Pressable,
+  View,
+  Text,
+} from 'react-native';
 import styles from './App.style';
 import { Timer } from './components';
+import Button from './components/Button';
 import Card from './components/Card';
 import ProgressBar from './components/ProgressBar';
 import QuizInput from './components/QuizInput';
@@ -28,8 +35,28 @@ export const App = () => {
         <ScoreLabel points={2}></ScoreLabel>
       </View>
       <View>
-        <Card title="Qual maior 9 da história do futebol"></Card>
-        <Timer style={styles.timer}></Timer>
+        <Card
+          title="Qual maior 9 da história do futebol ?"
+          renderTimer={() => <Timer style={styles.timer}></Timer>}
+        >
+          <FlatList
+            data={[
+              {
+                id: 1,
+                title: 'Ronaldo',
+              },
+            ]}
+            renderItem={({ item, index }) => (
+              <Pressable key={item.id}>
+                <Text>{item.title}</Text>
+              </Pressable>
+            )}
+          ></FlatList>
+
+          <Button theme="accent" style={styles.btn}>
+            Next
+          </Button>
+        </Card>
       </View>
 
       <KeyboardAvoidingView
