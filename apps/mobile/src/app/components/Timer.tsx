@@ -1,6 +1,6 @@
-import { View, ViewProps } from 'react-native';
-import { useCountdown } from '@utils';
+import { ViewProps } from 'react-native';
 import { Ellipse, G, Path, Rect, Svg, Text } from 'react-native-svg';
+import { useCountdown } from '../hooks';
 
 interface TimerProps {
   countdown?: number; // in miliseconds

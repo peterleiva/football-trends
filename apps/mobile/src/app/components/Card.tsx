@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat',
     fontWeight: 'bold',
     textAlign: 'center',
+    marginBottom: 24,
   },
   timer: {
     marginBottom: 24,
