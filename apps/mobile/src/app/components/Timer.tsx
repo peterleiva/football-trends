@@ -12,7 +12,7 @@ export function Timer({ countdown, style }: TimerProps): JSX.Element {
 
   return (
     <Svg width="123" height="108">
-      <G fill="none" fill-rule="evenodd">
+      <G fill="none" fillRule="evenodd">
         <G transform="translate(16 17)">
           <Rect
             width="1.393"
