@@ -35,5 +35,6 @@ const styles = StyleSheet.create({
   },
   timer: {
     marginBottom: 24,
+    alignSelf: 'center',
   },
 });
