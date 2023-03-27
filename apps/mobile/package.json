@@ -11,7 +11,11 @@
     "react-native-web": "*",
     "@nrwl/expo": "*",
     "@expo/metro-config": "*",
-    "react": "*"
+    "react": "*",
+    "@expo/vector-icons": "*",
+    "@expo-google-fonts/montserrat": "*",
+    "expo-splash-screen": "*",
+    "@expo/webpack-config": "*"
   },
   "scripts": {
     "eas-build-pre-install": "cd ../../ && cp package-lock.json ./apps/mobile/",
