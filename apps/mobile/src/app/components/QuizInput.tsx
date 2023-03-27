@@ -47,7 +47,6 @@ const inputStyle = StyleSheet.create({
     right: 12,
   },
   input: {
-    underlineColorAndroid: 'transparent',
     borderColor: '#BDBDBD',
     borderRadius: 12,
     borderWidth: 2,
