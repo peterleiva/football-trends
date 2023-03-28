@@ -45,7 +45,7 @@ const themes = (color: Themes) => {
       backgroundColor: getColor(color),
     },
     label: {
-      color: getColor('onForeground'),
+      color: getColor('onBackground'),
     },
   };
 };

@@ -1,7 +1,8 @@
 import { capitalize, getColor, grayScale } from '@utils';
 import { useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import Divider from './Divider';
+import Typography from './Typography';
 
 interface QuizOptionProps {
   /**
@@ -43,11 +44,13 @@ export default function QuizOption({
           selected && styles.selected,
         ]}
       >
-        <Text style={[selected && styles.selectedText, styles.containerText]}>
-          <Text style={styles.number}>{order}</Text>
-          <Divider />
-          <Text style={styles.title}>{capitalize(text)}</Text>
-        </Text>
+        <Typography theme={selected ? 'onBackground' : 'onForeground'}>
+          {order}
+        </Typography>
+        <Divider color={selected ? 'primary-dark' : undefined} />
+        <Typography theme={selected ? 'onBackground' : 'onForeground'}>
+          {capitalize(text)}
+        </Typography>
       </View>
     </Pressable>
   );
@@ -55,35 +58,19 @@ export default function QuizOption({
 
 const styles = StyleSheet.create({
   option: {
-    paddingVertical: 10,
-    paddingHorizontal: 16,
+    paddingVertical: 16,
+    paddingHorizontal: 24,
     borderRadius: 4,
     backgroundColor: grayScale(100),
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 6,
+    marginBottom: 12,
+    gap: 12,
   },
   selected: {
     backgroundColor: getColor('primary'),
   },
-  containerText: {
-    textAlign: 'center',
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  selectedText: {
-    color: getColor('onForeground'),
-  },
   active: {
     opacity: 0.8,
-  },
-  title: {
-    fontWeight: 'bold',
-    marginLeft: 12,
-  },
-  number: {
-    marginRight: 12,
-    fontWeight: 'bold',
   },
 });

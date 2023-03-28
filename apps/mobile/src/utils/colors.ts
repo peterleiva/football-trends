@@ -11,6 +11,8 @@ export type Themes = keyof Omit<
   'onForeground' | 'onBackground' | 'background'
 >;
 
+export type ColorVar = `${ColorName}-${ColorVariant}`;
+
 const grayShades: ColorShades = {
   100: '#F2F2F2',
   200: '#D9D9D9',
@@ -78,4 +80,10 @@ export const getColor = (
   }
 
   return COLOR_VARIANTS[variant][color];
+};
+
+export const colorVariant = (color: ColorVar | ColorName) => {
+  const [name, variant] = color.split('-');
+
+  return getColor(name as ColorName, variant as ColorVariant | undefined);
 };
