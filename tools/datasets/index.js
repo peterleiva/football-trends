@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+require('./cli');
+
 require('yargs')
   .scriptName('load-datasets')
   .usage('$0 <cmd> [args]')
