@@ -5,6 +5,8 @@
     "rootDir": ".",
     "module": "commonjs",
     "target": "es5",
+    "allowJs": true,
+    "checkJs": true,
     "types": ["node"],
     "importHelpers": false
   },
