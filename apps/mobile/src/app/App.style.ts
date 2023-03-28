@@ -14,21 +14,8 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 28,
     borderTopLeftRadius: 6,
   },
-  option: {
-    padding: 16,
-    borderRadius: 4,
-    backgroundColor: '#F2F2F2',
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  optionTitle: {
-    fontWeight: 'bold',
-    marginLeft: 12,
-  },
-  optionNumber: {
-    marginRight: 12,
-    fontWeight: 'bold',
+  optionList: {
+    marginBottom: 24,
   },
   container: {
     color: 'white',

@@ -1,21 +1,12 @@
-import { Ionicons } from '@expo/vector-icons';
-import { capitalize } from '@utils';
 import { useState } from 'react';
-import {
-  FlatList,
-  KeyboardAvoidingView,
-  Pressable,
-  View,
-  Text,
-} from 'react-native';
+import { FlatList, KeyboardAvoidingView, View } from 'react-native';
 import styles from './App.style';
 import { Timer } from './components';
 import Button from './components/Button';
 import Card from './components/Card';
-import Divider from './components/Divider';
-import ProgressBar from './components/ProgressBar';
+import QuizHeader from './components/QuizHeader';
 import QuizInput from './components/QuizInput';
-import ScoreLabel from './components/ScoreLabel';
+import QuizOption from './components/QuizOption';
 import Layout from './Layout';
 
 export const App = () => {
@@ -23,19 +14,7 @@ export const App = () => {
 
   return (
     <Layout>
-      <View style={styles.header}>
-        <Ionicons.Button
-          name="close"
-          size={32}
-          color="#fff"
-          backgroundColor="transparent"
-          onPress={() => {
-            alert('Close!!');
-          }}
-        />
-        <ProgressBar progress={20}></ProgressBar>
-        <ScoreLabel points={2}></ScoreLabel>
-      </View>
+      <QuizHeader score={10} progress={40} />
       <View>
         <Card
           title="Qual maior 9 da história do futebol ?"
@@ -60,16 +39,9 @@ export const App = () => {
                 title: 'PEdro',
               },
             ]}
+            style={styles.optionList}
             renderItem={({ item, index }) => (
-              <Pressable key={item.id} style={styles.option}>
-                <Text style={styles.optionNumber}>1</Text>
-                <Divider />
-                <View>
-                  <Text style={styles.optionTitle}>
-                    {capitalize(item.title)}
-                  </Text>
-                </View>
-              </Pressable>
+              <QuizOption key={item.id} text={item.title} order={index + 1} />
             )}
           ></FlatList>
 
