@@ -16,25 +16,38 @@ interface QuizOptionProps {
    *  Indicates the option is selected
    */
   selected?: boolean;
+  /**
+   * Called when option is pressed
+   */
+  onSelect?: () => void;
 }
 
 export default function QuizOption({
   order,
   text,
   selected = false,
+  onSelect,
 }: QuizOptionProps) {
   const [pressing, setPressing] = useState<boolean>(false);
 
   return (
     <Pressable
-      style={[styles.option, pressing && styles.active]}
       onPressIn={() => setPressing(true)}
       onPressOut={() => setPressing(false)}
+      onPress={() => onSelect?.()}
     >
-      <Text style={styles.optionNumber}>{order}</Text>
-      <Divider />
-      <View>
-        <Text style={styles.optionTitle}>{capitalize(text)}</Text>
+      <View
+        style={[
+          styles.option,
+          pressing && styles.active,
+          selected && styles.selected,
+        ]}
+      >
+        <Text style={[selected && styles.selectedText, styles.containerText]}>
+          <Text style={styles.number}>{order}</Text>
+          <Divider />
+          <Text style={styles.title}>{capitalize(text)}</Text>
+        </Text>
       </View>
     </Pressable>
   );
@@ -50,15 +63,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 6,
   },
+  selected: {
+    backgroundColor: '#00A8CC',
+  },
+  containerText: {
+    textAlign: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  selectedText: {
+    color: '#FFFFFF',
+  },
   active: {
-    backgroundColor: '#D8D8D8',
     opacity: 0.8,
   },
-  optionTitle: {
+  title: {
     fontWeight: 'bold',
     marginLeft: 12,
   },
-  optionNumber: {
+  number: {
     marginRight: 12,
     fontWeight: 'bold',
   },

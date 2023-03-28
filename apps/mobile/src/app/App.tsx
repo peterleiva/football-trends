@@ -41,7 +41,12 @@ export const App = () => {
             ]}
             style={styles.optionList}
             renderItem={({ item, index }) => (
-              <QuizOption key={item.id} text={item.title} order={index + 1} />
+              <QuizOption
+                key={item.id}
+                text={item.title}
+                order={index + 1}
+                selected={item.id === 2}
+              />
             )}
           ></FlatList>
 
