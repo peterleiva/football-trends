@@ -1,4 +1,4 @@
-import { capitalize } from '@utils';
+import { capitalize, getColor, grayScale } from '@utils';
 import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Divider from './Divider';
@@ -58,13 +58,13 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 16,
     borderRadius: 4,
-    backgroundColor: '#F2F2F2',
+    backgroundColor: grayScale(100),
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 6,
   },
   selected: {
-    backgroundColor: '#00A8CC',
+    backgroundColor: getColor('primary'),
   },
   containerText: {
     textAlign: 'center',
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   selectedText: {
-    color: '#FFFFFF',
+    color: getColor('onForeground'),
   },
   active: {
     opacity: 0.8,

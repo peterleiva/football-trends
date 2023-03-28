@@ -1,11 +1,12 @@
 import {
-  useFonts,
   Montserrat_400Regular,
   Montserrat_700Bold,
+  useFonts,
 } from '@expo-google-fonts/montserrat';
-import { SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
+import { getColor } from '@utils/colors';
 import * as SplashScreen from 'expo-splash-screen';
 import { StrictMode, useCallback } from 'react';
+import { SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
 
 interface FontProps {
   children: React.ReactNode;
@@ -40,7 +41,7 @@ export default function Layout({ children }: FontProps) {
 
 const styles = StyleSheet.create({
   layout: {
-    backgroundColor: '#2B2D42',
+    backgroundColor: getColor('background'),
     flex: 1,
     position: 'relative',
   },

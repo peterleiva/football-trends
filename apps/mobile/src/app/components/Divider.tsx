@@ -1,3 +1,4 @@
+import { grayScale } from '@utils/colors';
 import { StyleSheet, View } from 'react-native';
 
 export default function Divider() {
@@ -7,7 +8,7 @@ export default function Divider() {
 const styles = StyleSheet.create({
   divider: {
     width: 1,
-    backgroundColor: '#C1BDBD',
+    backgroundColor: grayScale(300),
     borderRadius: 8,
     marginVertical: 10,
     height: 12,

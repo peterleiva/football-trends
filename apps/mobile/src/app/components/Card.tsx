@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { getColor } from '@utils/colors';
+import { StyleSheet, Text, View } from 'react-native';
 
 interface CardProps {
   title: string;
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 26,
-    color: '#2B2D42',
+    color: getColor('onForeground'),
     fontFamily: 'Montserrat',
     fontWeight: 'bold',
     textAlign: 'center',

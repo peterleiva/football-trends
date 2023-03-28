@@ -1,5 +1,5 @@
+import { getColor, Themes } from '@utils';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { COLORS, getColor, Themes } from '../App.style';
 
 interface ButtonProps {
   theme: Themes;
@@ -45,12 +45,9 @@ const themes = (color: Themes) => {
       backgroundColor: getColor(color),
     },
     label: {
-      color: COLORS.onForeground,
+      color: getColor('onForeground'),
     },
   };
 };
 
 const getTheme = (theme: Themes) => StyleSheet.create(themes(theme));
-
-type Theme<T extends StyleSheet.NamedStyles<T> | StyleSheet.NamedStyles<any>> =
-  { [P in keyof T]: Parameters<typeof StyleSheet.create> };

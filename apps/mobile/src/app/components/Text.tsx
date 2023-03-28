@@ -1,3 +1,4 @@
+import { getColor } from '@utils/colors';
 import {
   StyleSheet,
   Text as NativeText,
@@ -12,7 +13,7 @@ export default function Text({ style, ...textProps }: TextProps) {
 
 const styles = StyleSheet.create({
   text: {
-    color: '#fff',
+    color: getColor('onBackground'),
     fontSize: 16,
   },
 });
