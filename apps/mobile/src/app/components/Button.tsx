@@ -1,7 +1,8 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { COLORS, getColor, Themes } from '../App.style';
 
 interface ButtonProps {
-  theme: keyof typeof themes;
+  theme: Themes;
   style?: any;
   children?: React.ReactNode;
 }
@@ -38,19 +39,18 @@ const baseStyles = StyleSheet.create({
   },
 });
 
-const themes = {
-  accent: {
+const themes = (color: Themes) => {
+  return {
     btn: {
-      backgroundColor: '#FFD166',
+      backgroundColor: getColor(color),
     },
     label: {
-      color: 'white',
+      color: COLORS.onForeground,
     },
-  },
+  };
 };
 
-const getTheme = (theme: keyof typeof themes) =>
-  StyleSheet.create(themes[theme]);
+const getTheme = (theme: Themes) => StyleSheet.create(themes(theme));
 
 type Theme<T extends StyleSheet.NamedStyles<T> | StyleSheet.NamedStyles<any>> =
   { [P in keyof T]: Parameters<typeof StyleSheet.create> };
