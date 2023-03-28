@@ -1,11 +1,4 @@
-import {
-  ButtonProps as NativeButtonProps,
-  Pressable,
-  PressableProps,
-  StyleSheet,
-  Text,
-  TextProps,
-} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 interface ButtonProps {
   theme: keyof typeof themes;
@@ -22,9 +15,14 @@ export default function Button({
   const theming = getTheme(theme);
 
   return (
-    <Pressable style={[baseStyles.btn, theming.btn, style]} {...btnProps}>
-      <Text style={[baseStyles.text, theming.label]}>{children}</Text>
-    </Pressable>
+    <TouchableOpacity
+      style={[baseStyles.btn, theming.btn, style]}
+      {...btnProps}
+    >
+      <View>
+        <Text style={[baseStyles.text, theming.label]}>{children}</Text>
+      </View>
+    </TouchableOpacity>
   );
 }
 

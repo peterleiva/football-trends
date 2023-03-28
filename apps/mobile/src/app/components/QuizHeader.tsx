@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet } from 'react-native';
-import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 import ProgressBar from './ProgressBar';
 import ScoreLabel from './ScoreLabel';
 
@@ -26,6 +26,7 @@ export default function QuizHeader({
         color="#fff"
         backgroundColor="transparent"
         onPress={onClose}
+        iconStyle={{ marginRight: 0 }}
       />
       <ProgressBar progress={progress}></ProgressBar>
       <ScoreLabel points={score}></ScoreLabel>

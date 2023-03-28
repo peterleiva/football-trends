@@ -1,5 +1,6 @@
 import { capitalize } from '@utils';
-import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { useState } from 'react';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Divider from './Divider';
 
 interface QuizOptionProps {
@@ -22,8 +23,14 @@ export default function QuizOption({
   text,
   selected = false,
 }: QuizOptionProps) {
+  const [pressing, setPressing] = useState<boolean>(false);
+
   return (
-    <Pressable style={styles.option}>
+    <Pressable
+      style={[styles.option, pressing && styles.active]}
+      onPressIn={() => setPressing(true)}
+      onPressOut={() => setPressing(false)}
+    >
       <Text style={styles.optionNumber}>{order}</Text>
       <Divider />
       <View>
@@ -42,6 +49,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 6,
+  },
+  active: {
+    backgroundColor: '#D8D8D8',
+    opacity: 0.8,
   },
   optionTitle: {
     fontWeight: 'bold',
