@@ -8,6 +8,8 @@
     "allowJs": true,
     "checkJs": true,
     "types": ["node"],
+    "esModuleInterop": true,
+    "strict": true,
     "importHelpers": false
   },
   "include": ["**/*.ts"]
