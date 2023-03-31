@@ -10,9 +10,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assets": [
-      "./assets"
-    ],
+    "assets": ["./assets"],
     "fonts": [
       {
         "family": "Montserrat",
@@ -26,9 +24,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "br.dev.peter.footballtrends"

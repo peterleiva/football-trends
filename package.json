@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "license": "UNLICENSED",
   "scripts": {
+    "format": "npm run prettier -- --write",
+    "format:check": "npm run prettier -- --check",
+    "prettier": "prettier .",
     "lint": "nx run-many --target=lint",
     "dataset:load-fifa": "ts-node tools/datasets"
   },
@@ -117,4 +120,3 @@
     "yargs": "^17.7.1"
   }
 }
-
