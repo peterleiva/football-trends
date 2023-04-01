@@ -10,7 +10,7 @@ type LayoutProps = {
 };
 
 export default function Layout({ children }: LayoutProps) {
-  const { open, toggle } = useToggle();
+  const { open, toggle } = useToggle(true);
 
   return (
     <Box sx={{ display: 'flex' }}>

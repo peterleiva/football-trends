@@ -3,34 +3,42 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import LayersIcon from '@mui/icons-material/Layers';
 import PeopleIcon from '@mui/icons-material/People';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import SportsSoccer from '@mui/icons-material/SportsSoccer';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
-import * as React from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export function DrawerButton({
   text,
   icon,
   onClick,
+  selected,
+  to = '',
 }: {
   text: string;
   icon: React.ReactNode;
   onClick?: () => void;
+  selected?: boolean;
+  to?: string;
 }) {
+  const router = useRouter();
   return (
-    <ListItemButton onClick={onClick}>
-      <ListItemIcon>{icon}</ListItemIcon>
-      <ListItemText primary={text} />
-    </ListItemButton>
+    <Link href={to}>
+      <ListItemButton onClick={onClick} selected={router.pathname === to}>
+        <ListItemIcon>{icon}</ListItemIcon>
+        <ListItemText primary={text} />
+      </ListItemButton>
+    </Link>
   );
 }
 
 export const MainListItems = () => (
   <>
-    <DrawerButton text="Dashboard" icon={<DashboardIcon />} />
-    <DrawerButton text="Orders" icon={<ShoppingCartIcon />} />
+    <DrawerButton text="Dashboard" icon={<DashboardIcon />} to="/" />
+    <DrawerButton text="Players" icon={<SportsSoccer />} to="/players" />
     <DrawerButton text="Customers" icon={<PeopleIcon />} />
     <DrawerButton text="Reports" icon={<BarChartIcon />} />
     <DrawerButton text="Integrations" icon={<LayersIcon />} />
