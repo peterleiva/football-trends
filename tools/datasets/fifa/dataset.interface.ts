@@ -1,45 +1,91 @@
 type FifaCsv = {
-  name: {
-    fullName: string;
-    fullName: string;
-  };
+  fullName: string;
+  /**
+   * Name, nicknames the player is known for
+   */
+  knownAs: string[];
+  /**
+   * Overall rating of the player using the 100 point scale according to the
+   * FIFA 23 game
+   */
   overall: number;
+  /**
+   * Potential rating of the player using the 100 point scale according to the
+   * FIFA 23 game
+   */
   potential: number;
-  value: string; // in euros
-  positionsPlayed: string[];
-  bestPosition: string;
+  /**
+   * Worth of the player in euros
+   */
+  value: string;
+  positionsPlayed: Position[];
+  bestPosition: Position;
   nationality: string;
   imageLink: string;
   age: number;
-  height: string; // in cm
-  weight: string; // in kg
+  /**
+   * Height in centimeters
+   */
+  height: string;
+  /**
+   * Weight in kilograms
+   */
+  weight: string;
   totalStats: number;
   baseStats: number;
 
   club: {
     clubName: string;
+    /**
+     * Salary of the player in euros
+     */
     wage: string;
+    /**
+     * Release clause of the player in euros
+     */
     releaseClause: string;
-    clubPosition: string;
-    contractUntil: string;
+    clubPosition: Position;
+    contractUntil: Date;
     clubJerseyNumber: number;
-    joinedOn: string;
-    onLoan: string;
+    joinedOn: Date;
+    onLoan: boolean;
   };
 
-  preferredFoot: 'LEFT' | 'RIGHT';
+  preferredFoot: 'LEFT' | 'RIGHT' | 'BOTH';
 
-  weakFootRating: number;
-  skillMoves: number;
-  internationalReputation: number;
-  national: {
-    nationalTeamName: string;
-    imageLinkNationalTeam: string;
-    nationalTeamPosition: string;
-    nationalTeamJerseyNumber: number;
+  /**
+   * Weak foot rating of the player using the 5 point scale
+   */
+  weakFootRating: Rating;
+  /**
+   * Skill moves rating of the player using the 5 point scale
+   */
+  skillMoves: Rating;
+  /**
+   * International reputation of the player using the 5 point scale
+   */
+  internationalReputation: Rating;
+  national?: {
+    nationalTeamName?: string;
+    imageLinkNationalTeam?: string;
+    nationalTeamPosition?: Position;
+    nationalTeamJerseyNumber?: number;
   };
-  attackingWorkRate: string;
-  defensiveWorkRate: string;
+
+  attackingWorkRate: WorkRate;
+  defensiveWorkRate: WorkRate;
+
+  stats: {
+    // goals	int	Total goals scored by player
+    goals: number;
+    // assists	int	Total assists by playe
+    assists: number;
+    // appearances	int	Total appearances by player
+    appearances: number;
+  };
+  /**
+   * Player traits according to the FIFA 23 game using the 100 point scale
+   */
   fifaStas: {
     paceTotal: number;
     shootingTotal: number;
@@ -107,6 +153,8 @@ type FifaCsv = {
 };
 
 type Rating = 1 | 2 | 3 | 4 | 5;
+
+type WorkRate = 'High' | 'Medium' | 'Low';
 
 type Position =
   | 'GK'
