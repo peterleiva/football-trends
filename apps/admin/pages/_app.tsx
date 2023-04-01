@@ -4,15 +4,14 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import { Layout } from '../src/components/layout';
+import createEmotionCache from '../src/utils/createEmotionCache';
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import './styles.css';
-
-import { Layout } from '../src/components/layout';
-import createEmotionCache from '../src/createEmotionCache';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
