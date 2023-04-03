@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "resolveJsonModule": true,
     "paths": {
-      "@football-trends/api-provider": ["packages/api-provider/src/index.ts"]
+      "@football-trends/api-provider": ["packages/api-provider/src/index.ts"],
+      "@football-trends/types": ["packages/types/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -7,13 +7,16 @@
     "format:check": "npm run prettier -- --check",
     "prettier": "prettier .",
     "lint": "nx run-many --target=lint",
-    "dataset:load-fifa": "ts-node tools/datasets"
+    "dataset:load-fifa": "ts-node tools/datasets",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "private": true,
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",
     "@emotion/cache": "^11.10.5",
     "@expo/cli": "0.4.11",
+    "@graphql-codegen/cli": "3.2.2",
+    "@graphql-codegen/client-preset": "2.1.1",
     "@graphql-tools/mock": "^8.7.19",
     "@graphql-tools/schema": "^9.0.17",
     "@nrwl/cypress": "15.9.2",
@@ -74,7 +77,11 @@
     "tailwindcss": "3.2.7",
     "ts-jest": "^29.0.5",
     "ts-node": "10.9.1",
-    "typescript": "~4.9.5"
+    "typescript": "~4.9.5",
+    "@graphql-codegen/typescript": "3.0.2",
+    "@graphql-codegen/typescript-resolvers": "3.1.1",
+    "@graphql-codegen/typescript-document-nodes": "3.0.2",
+    "@graphql-codegen/typescript-mongodb": "2.4.6"
   },
   "dependencies": {
     "@apollo/client": "^3.7.11",
