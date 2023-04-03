@@ -1,4 +1,4 @@
-import { ApolloServer, gql } from 'apollo-server-express';
+import { expressMiddleware } from '@apollo/server/express4';
 import cookieParser from 'cookie-parser';
 import cors, { type CorsRequest } from 'cors';
 import express, { json, urlencoded, type Express } from 'express';
@@ -7,19 +7,13 @@ import logger from 'morgan';
 import path from 'path';
 import * as User from './app/users';
 import * as DB from './database';
+import createGraphQLHandler from './graphql';
 
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
 
 async function createExpressApp(): Promise<Express> {
   const app = express();
-  const graphqlServer = new ApolloServer({
-    mocks: true,
-    typeDefs: gql`
-      type Query {
-        hello: String
-      }
-    `,
-  });
+  const graphqlServer = createGraphQLHandler();
 
   await Promise.all([DB.start(), graphqlServer.start()]);
 
@@ -35,7 +29,7 @@ async function createExpressApp(): Promise<Express> {
     express.static(path.join(__dirname, 'public'))
   );
 
-  graphqlServer.applyMiddleware({ app, path: '/graphql' });
+  app.use('/graphql', expressMiddleware(graphqlServer));
 
   app.use(User.ROUTER_PREFIX, User.router);
 
