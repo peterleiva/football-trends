@@ -5,21 +5,11 @@ type FifaCsv = {
    */
   knownAs: string[];
   /**
-   * Overall rating of the player using the 100 point scale according to the
-   * FIFA 23 game
-   */
-  overall: number;
-  /**
-   * Potential rating of the player using the 100 point scale according to the
-   * FIFA 23 game
-   */
-  potential: number;
-  /**
    * Worth of the player in euros
    */
   value: string;
-  positionsPlayed: Position[];
   bestPosition: Position;
+  positionsPlayed: Position[];
   nationality: string;
   imageLink: string;
   age: number;
@@ -87,6 +77,16 @@ type FifaCsv = {
    * Player traits according to the FIFA 23 game using the 100 point scale
    */
   fifaStas: {
+    /**
+     * Overall rating of the player using the 100 point scale according to the
+     * FIFA 23 game
+     */
+    overall: number;
+    /**
+     * Potential rating of the player using the 100 point scale according to the
+     * FIFA 23 game
+     */
+    potential: number;
     paceTotal: number;
     shootingTotal: number;
     passingTotal: number;
