@@ -30,9 +30,9 @@ export function DrawerButton({
       <ListItemButton
         onClick={onClick}
         selected={
-          to === '/'
+          to === '/' || to === ''
             ? router.pathname === '/'
-            : to && router.pathname.startsWith(to)
+            : router.pathname.startsWith(to)
         }
       >
         <ListItemIcon>{icon}</ListItemIcon>

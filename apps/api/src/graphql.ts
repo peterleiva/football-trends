@@ -3,8 +3,24 @@ import { addMocksToSchema } from '@graphql-tools/mock';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 
 const typeDefs = `
+  """
+  Football attletes
+  """
+  type Player {
+    id: ID!
+    name: String!
+    knownAs: String!
+    club: Club
+  }
+
+  type Club {
+    id: ID!
+    name: String!
+  }
+
   type Query {
-    hello: String
+    players: [Player!]!
+    player(id: ID!): Player!
   }
 `;
 

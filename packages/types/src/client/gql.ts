@@ -13,7 +13,10 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  query GetPlayers {\n    hello\n  }\n": types.GetPlayersDocument,
+  '\n  query GetPlayer($id: ID!) {\n    player(id: $id) {\n      id\n      name\n      knownAs\n    }\n  }\n':
+    types.GetPlayerDocument,
+  '\n  query GetPlayers {\n    players {\n      id\n      name\n      knownAs\n      club {\n        name\n      }\n    }\n  }\n':
+    types.GetPlayersDocument,
 };
 
 /**
@@ -33,10 +36,19 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query GetPlayers {\n    hello\n  }\n"): (typeof documents)["\n  query GetPlayers {\n    hello\n  }\n"];
+export function graphql(
+  source: '\n  query GetPlayer($id: ID!) {\n    player(id: $id) {\n      id\n      name\n      knownAs\n    }\n  }\n'
+): (typeof documents)['\n  query GetPlayer($id: ID!) {\n    player(id: $id) {\n      id\n      name\n      knownAs\n    }\n  }\n'];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\n  query GetPlayers {\n    players {\n      id\n      name\n      knownAs\n      club {\n        name\n      }\n    }\n  }\n'
+): (typeof documents)['\n  query GetPlayers {\n    players {\n      id\n      name\n      knownAs\n      club {\n        name\n      }\n    }\n  }\n'];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
 }
 
-export type DocumentType<TDocumentNode extends DocumentNode<any, any>> = TDocumentNode extends DocumentNode<  infer TType,  any>  ? TType  : never;
+export type DocumentType<TDocumentNode extends DocumentNode<any, any>> =
+  TDocumentNode extends DocumentNode<infer TType, any> ? TType : never;
