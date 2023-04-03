@@ -5,7 +5,7 @@ import './styles.css';
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
-    <ApiProvider>
+    <ApiProvider uri={process.env.NEXT_PUBLIC_API}>
       <Head>
         <title>Football Trends</title>
       </Head>

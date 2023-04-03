@@ -26,7 +26,7 @@ export default function MyApp(props: MyAppProps) {
 
   return (
     <CacheProvider value={emotionCache}>
-      <ApiProvider>
+      <ApiProvider uri={process.env.NEXT_PUBLIC_API}>
         <Head>
           <meta name="viewport" content="initial-scale=1, width=device-width" />
         </Head>

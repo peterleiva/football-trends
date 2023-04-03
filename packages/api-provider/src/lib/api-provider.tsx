@@ -1,19 +1,22 @@
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { useState } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
 
 interface QueryClientProps {
+  uri?: string;
   children?: React.ReactNode;
 }
 
-export default function ApiProvider({ children }: QueryClientProps) {
-  const [queryClient] = useState(() => new QueryClient());
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      {children}
-
-      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
-    </QueryClientProvider>
+export default function ApiProvider({
+  uri = 'http://localhost:3000/graphql',
+  children,
+}: QueryClientProps) {
+  const [queryClient] = useState(
+    () =>
+      new ApolloClient({
+        uri,
+        cache: new InMemoryCache(),
+      })
   );
+
+  return <ApolloProvider client={queryClient}>{children}</ApolloProvider>;
 }

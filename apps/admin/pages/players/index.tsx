@@ -1,3 +1,3 @@
 export default function Players() {
-  return <div>Players</div>;
+  return <div>All Players</div>;
 }

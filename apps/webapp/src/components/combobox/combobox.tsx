@@ -1,4 +1,3 @@
-import { useGetUsersByKeyword } from '../../use-users/use-users';
 import { SearchInput } from './search';
 import { useCombobox } from './use-combobox';
 import { getId, getLabel, Option } from './utils';
@@ -14,16 +13,7 @@ export function Combobox<T extends Option>({
   renderOption,
   renderEmptyState,
 }: ComboboxProps<T>) {
-  const { isVisible, onSelect, register, searchTerm } = useCombobox();
-
-  const { users } = useGetUsersByKeyword(searchTerm);
-
-  options = (users?.map((u) => ({ label: u.name, id: u.id })) as any) ?? [];
-  renderOption = (props, option: T) => (
-    <li className="cursor-pointer p-2 hover:bg-slate-400" {...props}>
-      {option.label}
-    </li>
-  );
+  const { isVisible, onSelect, register } = useCombobox();
 
   return (
     <div className="combobox">
