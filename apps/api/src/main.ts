@@ -1,47 +1,71 @@
-import express from 'express';
-import logger from 'morgan';
-import createError from 'http-errors';
+import { ApolloServer, gql } from 'apollo-server-express';
 import cookieParser from 'cookie-parser';
+import cors, { type CorsRequest } from 'cors';
+import express, { json, urlencoded, type Express } from 'express';
+import createError from 'http-errors';
+import logger from 'morgan';
 import path from 'path';
 import * as User from './app/users';
 import * as DB from './database';
 
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
 
-const app = express();
+async function createExpressApp(): Promise<Express> {
+  const app = express();
+  const graphqlServer = new ApolloServer({
+    mocks: true,
+    typeDefs: gql`
+      type Query {
+        hello: String
+      }
+    `,
+  });
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+  await Promise.all([DB.start(), graphqlServer.start()]);
 
-DB.start();
+  app.use(
+    logger('dev'),
+    cors<CorsRequest>({
+      origin: true,
+      credentials: true,
+    }),
+    json(),
+    urlencoded(),
+    cookieParser(),
+    express.static(path.join(__dirname, 'public'))
+  );
 
-app.use(User.ROUTER_PREFIX, User.router);
+  graphqlServer.applyMiddleware({ app, path: '/graphql' });
 
-app.get('/', (req, res) => {
-  res.json({ message: 'Hello API' });
-});
+  app.use(User.ROUTER_PREFIX, User.router);
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
+  app.get('/', (req, res) => {
+    res.json({ message: 'Hello API' });
+  });
 
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  // catch 404 and forward to error handler
+  app.use(function (req, res, next) {
+    next(createError(404));
+  });
 
-  console.error(err);
+  // error handler
+  app.use(function (err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  throw err;
-});
+    console.error(err);
 
-app.listen(port, () => {
-  console.log(`[ ready ] http://localhost:${port}`);
-});
+    // render the error page
+    res.status(err.status || 500);
+    throw err;
+  });
+
+  app.listen(port, () => {
+    console.log(`[ ready ] http://localhost:${port}`);
+  });
+
+  return app;
+}
+
+createExpressApp();
