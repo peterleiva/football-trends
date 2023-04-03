@@ -5,6 +5,7 @@ const config: CodegenConfig = {
   schema: 'http://localhost:3000/graphql',
   documents: ['./apps/**/*.tsx'],
   ignoreNoDocuments: true, // for better experience with the watcher
+  hooks: { afterOneFileWrite: ['prettier --write'] },
   generates: {
     'packages/types/src/graphql.ts': {
       plugins: [
