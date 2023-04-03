@@ -27,7 +27,14 @@ export function DrawerButton({
   const router = useRouter();
   return (
     <Link href={to}>
-      <ListItemButton onClick={onClick} selected={router.pathname === to}>
+      <ListItemButton
+        onClick={onClick}
+        selected={
+          to === '/'
+            ? router.pathname === '/'
+            : to && router.pathname.startsWith(to)
+        }
+      >
         <ListItemIcon>{icon}</ListItemIcon>
         <ListItemText primary={text} />
       </ListItemButton>

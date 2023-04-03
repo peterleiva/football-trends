@@ -8,7 +8,7 @@ interface StylesAppBarProps extends MuiAppBarProps {
   open?: boolean;
 }
 
-const StylesAppBar = styled(MuiAppBar, {
+const StyledAppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })<StylesAppBarProps>(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -33,7 +33,7 @@ interface AppBarProps extends StylesAppBarProps {
 
 export function AppBar({ title, open, toggle }: AppBarProps) {
   return (
-    <StylesAppBar position="absolute" open={open}>
+    <StyledAppBar position="absolute" open={open}>
       <Toolbar
         sx={{
           pr: '24px', // keep right padding when drawer closed
@@ -61,6 +61,6 @@ export function AppBar({ title, open, toggle }: AppBarProps) {
           {title}
         </Typography>
       </Toolbar>
-    </StylesAppBar>
+    </StyledAppBar>
   );
 }
