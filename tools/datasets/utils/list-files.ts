@@ -2,9 +2,13 @@ import { exec } from 'child_process';
 import path from 'path';
 
 /**
- * Show all datasets files relative to the given directory
+ * List all files recursevily relative to a directory, excluding some extensions
+ *
+ * @example listFiles('datasets/', ['.txt', '.json'])
+ *  ['datasets/000001.jpg', 'datasets/subdirectory/000002.jpg']
+ *
  */
-export default function listDatasets(
+export default function listFiles(
   dir: string,
   excludeExtensions: string[] = []
 ): Promise<string[]> {
