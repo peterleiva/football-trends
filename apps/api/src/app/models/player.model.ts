@@ -6,27 +6,7 @@ import {
   model,
 } from 'mongoose';
 import { FifaStats, FifaStatsModel } from './fifa-stats.model';
-
-// position as const
-export enum Position {
-  GK = 'GK',
-  CB = 'CB',
-  LB = 'LB',
-  RB = 'RB',
-  RWB = 'RWB',
-  LWB = 'LWB',
-  CDM = 'CDM',
-  CM = 'CM',
-  LM = 'LM',
-  RM = 'RM',
-  CF = 'CF',
-  ST = 'ST',
-  LW = 'LW',
-  LF = 'LF',
-  RF = 'RF',
-  RW = 'RW',
-  CAM = 'CAM',
-}
+import { Position } from './position.enum';
 
 export enum Foot {
   Left = 'Left',
@@ -42,10 +22,10 @@ export interface Player {
   /**
    * Worth value of the player in euros
    */
-  value: Decimal128;
+  marketValue: Decimal128;
   bestPosition: Position;
   positionsPlayed: Position[];
-  // nationalities: string[];
+  nationalities: string[];
   birthDate?: Date;
   avatar?: string;
   /**
@@ -88,7 +68,7 @@ const schema = new Schema<Player>({
     enum: Foot,
   },
 
-  value: {
+  marketValue: {
     type: Schema.Types.Decimal128,
   },
   bestPosition: {
