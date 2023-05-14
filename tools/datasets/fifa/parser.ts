@@ -24,6 +24,7 @@ export async function fifaParser(datasetPath: string) {
 
   try {
     const stats = await stat(datasetPath);
+    size = stats.size;
 
     if (!stats.isFile()) {
       console.error('Not a file: ', datasetPath);
@@ -44,22 +45,12 @@ export async function fifaParser(datasetPath: string) {
 
   parser.read();
 
-  // parser.on('readable', () => {
-  //   let data;
+  parser.on('error', (err) => {
+    console.error('Error parsing: ', err);
+    progressBar.stop();
 
-  //   while ((data = parser.read())) {
-  //     const { record, info } = data;
-
-  //     progressBar.update(info.bytes);
-  //   }
-  // });
-
-  // parser.on('error', (err) => {
-  //   console.error('Error parsing: ', err);
-  //   progressBar.stop();
-
-  //   process.exit(1);
-  // });
+    process.exit(1);
+  });
 
   parser.on('end', () => {
     progressBar.stop();
@@ -69,6 +60,104 @@ export async function fifaParser(datasetPath: string) {
     ({ record, info }: { info: Info; record: Record }) => {
       // console.log('transformer', info);
       progressBar.update(info.bytes);
+      const [
+        knownAs,
+        fullName,
+        potentital,
+        marketValue,
+        positionsPlayed,
+        bestPosition,
+        nationalityt,
+        imageLink,
+        age,
+        height,
+        weight,
+        totalStats,
+        baseStats,
+        clubName,
+        wage,
+        releaseClause,
+        clubPosition,
+        clubeJerseyNumber,
+        clubJoinedOn,
+        onLoad,
+        preferredFoot,
+        weekFootRating,
+        skillMoves,
+        internationalReputation,
+        nationalTeamName,
+        nationalTeamImageLink,
+        nationalTeamPosition,
+        nationalTeamJerseyNumber,
+        attackingWorkRate,
+        defensiveWorkRate,
+        paceTotal,
+        ShootingTotal,
+        passingTotal,
+        dribblingTotal,
+        defendingTotal,
+        physicalTotal,
+        crossing,
+        finishing,
+        headingAccuracy,
+        shortPassing,
+        volleys,
+        dribbling,
+        curve,
+        freeKickAccuracy,
+        longPassing,
+        ballControl,
+        acceleration,
+        sprintSpeed,
+        agility,
+        reactions,
+        balance,
+        shotPower,
+        jumping,
+        stamina,
+        strength,
+        longShots,
+        aggression,
+        interceptions,
+        positioning,
+        vision,
+        penalties,
+        composure,
+        marking,
+        standingTackle,
+        slidingTackle,
+        gkDiving,
+        gkHandling,
+        gkKicking,
+        gkPositioning,
+        gkReflexes,
+        stRating,
+        lwRating,
+        lfRating,
+        cfRating,
+        rfRating,
+        rwRating,
+        camRating,
+        lmRating,
+        cmRating,
+        rmRating,
+        lwbRating,
+        cdmRating,
+        rwbRating,
+        lbRating,
+        cbRating,
+        rbRating,
+        gkRating,
+      ] = record;
+
+      return {
+        fullName,
+        knownAs: [knownAs],
+        value: marketValue,
+        potentital,
+        bestPosition,
+        positionsPlayed: positionsPlayed.split(','),
+      };
     }
   );
 

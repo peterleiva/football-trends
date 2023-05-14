@@ -34,7 +34,15 @@ export const handler = async ({
 
   info(table.toString());
 
-  await fifaParser(asset);
+  const stream = await fifaParser(asset);
+
+  stream.on('readable', () => {
+    let record: FifaCsv;
+
+    while ((record = stream.read())) {
+      console.log(record);
+    }
+  });
 };
 
 function getAssetPath(file: string): string {
