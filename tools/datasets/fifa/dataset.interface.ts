@@ -1,4 +1,4 @@
-type FifaCsv = {
+export type FifaCsv = {
   fullName: string;
   /**
    * Name, nicknames the player is known for
@@ -7,7 +7,7 @@ type FifaCsv = {
   /**
    * Worth of the player in euros
    */
-  value: string;
+  marketValue: number;
   bestPosition: Position;
   positionsPlayed: Position[];
   nationality: string;
@@ -16,11 +16,11 @@ type FifaCsv = {
   /**
    * Height in centimeters
    */
-  height: string;
+  height: number;
   /**
    * Weight in kilograms
    */
-  weight: string;
+  weight: number;
   totalStats: number;
   baseStats: number;
 
@@ -29,19 +29,22 @@ type FifaCsv = {
     /**
      * Salary of the player in euros
      */
-    wage: string;
+    wage: number;
     /**
      * Release clause of the player in euros
      */
-    releaseClause: string;
+    releaseClause: number;
     clubPosition: Position;
+    /**
+     * Year contract ends
+     */
     contractUntil: Date;
-    clubJerseyNumber: number;
+    jerseyNumber: number;
     joinedOn: Date;
     onLoan: boolean;
   };
 
-  preferredFoot: 'LEFT' | 'RIGHT' | 'BOTH';
+  preferredFoot: Foot;
 
   /**
    * Weak foot rating of the player using the 5 point scale
@@ -56,16 +59,16 @@ type FifaCsv = {
    */
   internationalReputation: Rating;
   national?: {
-    nationalTeamName?: string;
-    imageLinkNationalTeam?: string;
-    nationalTeamPosition?: Position;
-    nationalTeamJerseyNumber?: number;
+    teamName?: string;
+    avatar?: string;
+    position?: Position;
+    jerseyNumber?: number;
   };
 
   attackingWorkRate: WorkRate;
   defensiveWorkRate: WorkRate;
 
-  stats: {
+  stats?: {
     // goals	int	Total goals scored by player
     goals: number;
     // assists	int	Total assists by playe
@@ -76,7 +79,7 @@ type FifaCsv = {
   /**
    * Player traits according to the FIFA 23 game using the 100 point scale
    */
-  fifaStas: {
+  fifaStats: {
     /**
      * Overall rating of the player using the 100 point scale according to the
      * FIFA 23 game
@@ -152,11 +155,12 @@ type FifaCsv = {
   };
 };
 
-type Rating = 1 | 2 | 3 | 4 | 5;
+export type Rating = 1 | 2 | 3 | 4 | 5;
 
-type WorkRate = 'High' | 'Medium' | 'Low';
+export type WorkRate = 'High' | 'Medium' | 'Low';
 
-type Position =
+// TODO: transformar em enum usando o nome inteiro para ler melhor
+export type Position =
   | 'GK'
   | 'CB'
   | 'LB'
@@ -174,3 +178,5 @@ type Position =
   | 'RF'
   | 'RW'
   | 'CAM';
+
+export type Foot = 'Left' | 'Right' | 'Both';

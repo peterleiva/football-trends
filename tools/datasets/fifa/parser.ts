@@ -1,9 +1,9 @@
-import { Presets, SingleBar } from 'cli-progress';
 import { Info, parse } from 'csv-parse';
 import { constants, createReadStream } from 'fs';
 import { access, stat } from 'fs/promises';
 import path from 'path';
 import { transform } from 'stream-transform';
+import { parseFifaCSVRecord } from './parse-csv-record';
 
 type Record = string[];
 
@@ -35,9 +35,6 @@ export async function fifaParser(datasetPath: string) {
     process.exit(1);
   }
 
-  const progressBar = new SingleBar(Presets.shades_classic);
-  progressBar.start(size, 0);
-
   const parser = parse({
     skip_empty_lines: true,
     info: true,
@@ -45,118 +42,11 @@ export async function fifaParser(datasetPath: string) {
 
   parser.read();
 
-  parser.on('error', (err) => {
-    console.error('Error parsing: ', err);
-    progressBar.stop();
-
-    process.exit(1);
-  });
-
-  parser.on('end', () => {
-    progressBar.stop();
-  });
-
   const transformer = transform(
     ({ record, info }: { info: Info; record: Record }) => {
-      // console.log('transformer', info);
-      progressBar.update(info.bytes);
-      const [
-        knownAs,
-        fullName,
-        potentital,
-        marketValue,
-        positionsPlayed,
-        bestPosition,
-        nationalityt,
-        imageLink,
-        age,
-        height,
-        weight,
-        totalStats,
-        baseStats,
-        clubName,
-        wage,
-        releaseClause,
-        clubPosition,
-        clubeJerseyNumber,
-        clubJoinedOn,
-        onLoad,
-        preferredFoot,
-        weekFootRating,
-        skillMoves,
-        internationalReputation,
-        nationalTeamName,
-        nationalTeamImageLink,
-        nationalTeamPosition,
-        nationalTeamJerseyNumber,
-        attackingWorkRate,
-        defensiveWorkRate,
-        paceTotal,
-        ShootingTotal,
-        passingTotal,
-        dribblingTotal,
-        defendingTotal,
-        physicalTotal,
-        crossing,
-        finishing,
-        headingAccuracy,
-        shortPassing,
-        volleys,
-        dribbling,
-        curve,
-        freeKickAccuracy,
-        longPassing,
-        ballControl,
-        acceleration,
-        sprintSpeed,
-        agility,
-        reactions,
-        balance,
-        shotPower,
-        jumping,
-        stamina,
-        strength,
-        longShots,
-        aggression,
-        interceptions,
-        positioning,
-        vision,
-        penalties,
-        composure,
-        marking,
-        standingTackle,
-        slidingTackle,
-        gkDiving,
-        gkHandling,
-        gkKicking,
-        gkPositioning,
-        gkReflexes,
-        stRating,
-        lwRating,
-        lfRating,
-        cfRating,
-        rfRating,
-        rwRating,
-        camRating,
-        lmRating,
-        cmRating,
-        rmRating,
-        lwbRating,
-        cdmRating,
-        rwbRating,
-        lbRating,
-        cbRating,
-        rbRating,
-        gkRating,
-      ] = record;
-
       return {
-        fullName,
-        knownAs: [knownAs],
-        value: marketValue,
-        potentital,
-        bestPosition,
-        positionsPlayed: positionsPlayed.split(','),
+        info,
+        record: parseFifaCSVRecord(record),
       };
     }
   );

@@ -1,11 +1,14 @@
 import bytes from 'bytes';
+import { Presets, SingleBar } from 'cli-progress';
 import Table from 'cli-table';
 import { info } from 'console';
+import { Info } from 'csv-parse/.';
 import fs, { access } from 'fs/promises';
 import inquirer from 'inquirer';
 import { DateTime } from 'luxon';
 import path from 'path';
 import { type ArgumentsCamelCase } from 'yargs';
+import { FifaCsv } from '../../fifa/dataset.interface';
 import { fifaParser } from '../../fifa/parser';
 import { listDatasets } from '../../utils';
 
@@ -16,6 +19,29 @@ export const handler = async ({
   dataset,
 }: ArgumentsCamelCase<{ dataset?: string }>) => {
   const asset = await readAsset(dataset);
+
+  const { size } = await showGeneralInfo(asset);
+
+  const stream = await fifaParser(asset);
+
+  const progressBar = new SingleBar(Presets.shades_classic);
+  progressBar.start(size, 0);
+
+  stream.on('readable', () => {
+    let data: { record: FifaCsv; info: Info };
+
+    while ((data = stream.read())) {
+      const { record, info } = data;
+      progressBar.update(info.bytes);
+    }
+  });
+
+  stream.on('end', () => {
+    progressBar.stop();
+  });
+};
+
+async function showGeneralInfo(asset: string): Promise<{ size: number }> {
   console.info('loading "%s"', path.basename(asset));
 
   const stats = await fs.stat(asset);
@@ -34,16 +60,10 @@ export const handler = async ({
 
   info(table.toString());
 
-  const stream = await fifaParser(asset);
-
-  stream.on('readable', () => {
-    let record: FifaCsv;
-
-    while ((record = stream.read())) {
-      console.log(record);
-    }
-  });
-};
+  return {
+    size,
+  };
+}
 
 function getAssetPath(file: string): string {
   return path.resolve(__dirname, '../../assets', file);
