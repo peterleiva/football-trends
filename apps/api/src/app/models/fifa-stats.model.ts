@@ -1,5 +1,5 @@
 import { HydratedDocument, ObjectId, Schema, model } from 'mongoose';
-import { Position } from './player.model';
+import { Position } from './position.enum';
 
 /**
  * Player traits according to the FIFA 23 game using the 100 point scale
