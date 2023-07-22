@@ -57,3 +57,4 @@ npm-debug.*
 web-build/
 cache/
 .env
+apps/mobile-e2e/artifacts
