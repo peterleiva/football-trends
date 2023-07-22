@@ -3,7 +3,7 @@
   "npmScope": "football-trends",
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/nx-cloud",
+      "runner": "nx-cloud",
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"],
         "accessToken": "MGI5NDQ0M2ItZDMyZS00Yjg5LWI2ZDMtZTQ1NTBjZTgyNzRmfHJlYWQtd3JpdGU="
@@ -32,7 +32,8 @@
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
       "!{projectRoot}/tsconfig.spec.json",
       "!{projectRoot}/jest.config.[jt]s",
-      "!{projectRoot}/.eslintrc.json"
+      "!{projectRoot}/.eslintrc.json",
+      "!{projectRoot}/src/test-setup.[jt]s"
     ],
     "sharedGlobals": ["{workspaceRoot}/babel.config.json"]
   },
@@ -41,7 +42,7 @@
     "libsDir": "packages"
   },
   "generators": {
-    "@nrwl/react": {
+    "@nx/react": {
       "application": {
         "babel": true
       },
@@ -49,7 +50,7 @@
         "unitTestRunner": "jest"
       }
     },
-    "@nrwl/next": {
+    "@nx/next": {
       "application": {
         "style": "scss",
         "linter": "eslint"
