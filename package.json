@@ -63,7 +63,7 @@
     "autoprefixer": "10.4.13",
     "babel-jest": "^29.4.1",
     "babel-preset-expo": "~9.3.2",
-    "cypress": "^12.2.0",
+    "cypress": "^13.0.0",
     "detox": "^20.9.0",
     "eas-cli": "~3.13.3",
     "esbuild": "0.17.5",
