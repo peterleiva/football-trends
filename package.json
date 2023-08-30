@@ -115,7 +115,7 @@
     "http-errors": "^2.0.0",
     "inquirer": "~8.0.0",
     "luxon": "^3.3.0",
-    "mongoose": "^6.11.3",
+    "mongoose": "^6.12.0",
     "morgan": "^1.10.0",
     "node-environment": "^0.5.1",
     "react": "18.2.0",
