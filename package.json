@@ -83,7 +83,7 @@
     "metro": "0.74.1",
     "metro-resolver": "0.74.1",
     "nx": "16.5.5",
-    "postcss": "8.4.19",
+    "postcss": "8.4.31",
     "prettier": "^2.6.2",
     "react-test-renderer": "18.2.0",
     "sass": "1.55.0",
